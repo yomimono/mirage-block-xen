@@ -43,7 +43,7 @@ end
 
 open Lwt
 open Blkproto
-open Gnt
+module Gntref = OS.Xen.Gntref
 
 type ops = {
   read : int64 -> Cstruct.t list -> unit Lwt.t;
@@ -51,7 +51,7 @@ type ops = {
 }
 
 type stats = {
-  ring_utilisation: int array; (* one entry per leval, last entry includes all larger levels *)
+  ring_utilisation: int array; (* one entry per level, last entry includes all larger levels *)
   segments_per_request: int array; (* one entry per number of segments *)
   mutable total_requests: int;
   mutable total_ok: int;
